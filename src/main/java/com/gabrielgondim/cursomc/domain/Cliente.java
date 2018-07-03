@@ -38,6 +38,11 @@ public class Cliente implements Serializable {
 	@CollectionTable(name="telefone") // nome da tabela que sera armazenada os telefones
 	private Set<String> telefones = new HashSet<>();
 	
+	//lista nao se coloca no construtor
+	@OneToMany(mappedBy="cliente")
+	private List<Pedido> pedidos = new ArrayList<>();	
+	
+	
 	public Cliente() {
 		
 	}
@@ -90,6 +95,14 @@ public class Cliente implements Serializable {
 	public void setTipo(TipoCliente tipo) {
 		this.tipo = tipo.getCod();
 	}
+	
+	public List<Pedido> getPedidos() {
+		return pedidos;
+	}
+
+	public void setPedidos(List<Pedido> pedidos) {
+		this.pedidos = pedidos;
+	}
 
 	public List<Endereco> getEnderecos() {
 		return enderecos;
@@ -132,7 +145,5 @@ public class Cliente implements Serializable {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
-	}
-	
-	
+	}	
 }
