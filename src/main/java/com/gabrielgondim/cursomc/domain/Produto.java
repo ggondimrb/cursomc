@@ -28,7 +28,7 @@ public class Produto implements Serializable{
 	private String nome;
 	private Double preco;
 	
-	@JsonBackReference   // avisando que no outro relacionamento ja esta sendo chamado
+	@JsonIgnore
 	@ManyToMany
 	@JoinTable(name = "PRODUTO_CATEGORIA",
 		joinColumns = @JoinColumn(name = "produto_id"),
