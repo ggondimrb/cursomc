@@ -19,6 +19,7 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import com.gabrielgondim.cursomc.security.JWTAuthenticationFilter;
+import com.gabrielgondim.cursomc.security.JWTAuthorizationFilter;
 import com.gabrielgondim.cursomc.security.JWTUtil;
 
 @Configuration
@@ -59,6 +60,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		
 		//adicionando filtro para autorizar login
 		http.addFilter(new JWTAuthenticationFilter(authenticationManager(), jwtUtil));
+		//adicionando filtro para autenticar login
+		http.addFilter(new JWTAuthorizationFilter(authenticationManager(), jwtUtil, userDetailsService));
 		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 	}
 	
