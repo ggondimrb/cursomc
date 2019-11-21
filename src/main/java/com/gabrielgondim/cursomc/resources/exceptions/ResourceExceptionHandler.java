@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import com.gabrielgondim.cursomc.services.exceptions.ObjectNotFoundException;
+import com.gabrielgondim.cursomc.services.exceptions.AuthorizationException;
 import com.gabrielgondim.cursomc.services.exceptions.DataIntegrityException;
 
 //classe auxiliar que vai interceptar as excecoes
@@ -40,5 +41,12 @@ public class ResourceExceptionHandler {
 		}
 		
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(err);
+	}
+	
+	@ExceptionHandler(AuthorizationException.class)
+	public ResponseEntity<StandardError> authorization(AuthorizationException e, HttpServletRequest request) {
+		// FORBIDDEN = cd http acesso negado
+		StandardError err = new StandardError(HttpStatus.FORBIDDEN.value(), e.getMessage(), System.currentTimeMillis());
+		return ResponseEntity.status(HttpStatus.FORBIDDEN).body(err);
 	}
 }
