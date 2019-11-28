@@ -30,11 +30,13 @@ import com.gabrielgondim.cursomc.repositories.ItemPedidoRepository;
 import com.gabrielgondim.cursomc.repositories.PagamentoRepository;
 import com.gabrielgondim.cursomc.repositories.PedidoRepository;
 import com.gabrielgondim.cursomc.repositories.ProdutoRepository;
+import com.gabrielgondim.cursomc.services.S3Service;
 
 @SpringBootApplication
 public class CursomcApplication implements CommandLineRunner {
 	
-
+	@Autowired
+	private S3Service s3Service;
 	
 	
 	public static void main(String[] args) {
@@ -43,9 +45,6 @@ public class CursomcApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		// TODO Auto-generated method stub
-		
-		
-		
+		s3Service.uploadFile("C:\\gabriel\\fotos\\chile.jpg");
 	}
 }
