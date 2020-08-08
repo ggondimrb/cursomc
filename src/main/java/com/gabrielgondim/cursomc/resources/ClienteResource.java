@@ -20,7 +20,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.gabrielgondim.cursomc.domain.Cliente;
-import com.gabrielgondim.cursomc.domain.Cliente;
 import com.gabrielgondim.cursomc.dto.ClienteDTO;
 import com.gabrielgondim.cursomc.dto.ClienteNewDTO;
 import com.gabrielgondim.cursomc.services.ClienteService;
@@ -36,6 +35,13 @@ public class ClienteResource {
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
 	public ResponseEntity<Cliente> find(@PathVariable Integer id)   {
 		Cliente obj = service.find(id);
+		return ResponseEntity.ok().body(obj);
+	
+	}
+	
+	@RequestMapping(value="/email", method=RequestMethod.GET)
+	public ResponseEntity<Cliente> find(@RequestParam(value="value") String email)   {
+		Cliente obj = service.findByEmail(email);
 		return ResponseEntity.ok().body(obj);
 	
 	}

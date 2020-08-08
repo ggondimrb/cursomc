@@ -18,9 +18,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.gabrielgondim.cursomc.domain.enums.Perfil;
 import com.gabrielgondim.cursomc.domain.enums.TipoCliente;
 
@@ -58,8 +56,7 @@ public class Cliente implements Serializable {
 	//lista nao se coloca no construtor
 	@JsonIgnore
 	@OneToMany(mappedBy="cliente")
-	private List<Pedido> pedidos = new ArrayList<>();	
-	
+	private List<Pedido> pedidos = new ArrayList<>();		
 	
 	public Cliente() {
 		addPerfil(Perfil.CLIENTE);
@@ -157,7 +154,7 @@ public class Cliente implements Serializable {
 	public void setTelefones(Set<String> telefones) {
 		this.telefones = telefones;
 	}
-
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -181,5 +178,6 @@ public class Cliente implements Serializable {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
-	}	
+	}
+
 }
